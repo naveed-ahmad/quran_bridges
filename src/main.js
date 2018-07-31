@@ -6,6 +6,8 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
 
 // Import Framework7 Vue
 import Framework7Vue from 'framework7-vue/framework7-vue.esm.bundle.js';
+import VueYouTubeEmbed from 'vue-youtube-embed'
+
 
 // Import F7 Style
 import Framework7CSS from 'framework7/css/framework7.css'
@@ -20,7 +22,7 @@ import FontAwesome from 'font-awesome/css/font-awesome.css'
 // import AppStyles from './assets/sass/main.scss'
 
 // Import App Component
-import app from './main.vue'
+import app from './app.vue'
 
 
 // Import Vuex Storage
@@ -30,6 +32,7 @@ import store from './assets/vuex/storage.js'
 // Different F7-Vue plugin initialization with f7 v3.0
 Framework7.use(Framework7Vue)
 
+Vue.use(VueYouTubeEmbed);
 
 // Init Vue App
 export default new Vue({
