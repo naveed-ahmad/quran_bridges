@@ -12,16 +12,7 @@
         <i class="fa fa-home"></i>
       </f7-list-item>
 
-      <f7-list-item link="/page/letters/" title="Letter Recipe" view="#main-view" panel-close>
-        <i class="fa fa-address-card"></i>
-      </f7-list-item>
-
-
-      <f7-list-item link="/page/tips/" title="Tips" view="#main-view" panel-close>
-        <i class="fa fa-check"></i>
-      </f7-list-item>
-
-      <f7-list-item link="/page/videos/" title="Game Plays" view="#main-view" panel-close>
+      <f7-list-item link="/videos/" title="Videos" view="#main-view" panel-close>
         <i class="fa fa-play-circle"></i>
       </f7-list-item>
 

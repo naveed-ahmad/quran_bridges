@@ -1,10 +1,8 @@
 export default class Surah {
   static init ( callback ) {
     window.data = {};
-    callback();
-    /*
     var xhr = new XMLHttpRequest ();
-    xhr.open ( 'GET', 'static/ohol.db', true );
+    xhr.open ( 'GET', 'static/bridges.db', true );
     xhr.responseType = 'arraybuffer';
 
     xhr.onload = function ( e ) {
@@ -13,13 +11,14 @@ export default class Surah {
 
       callback ();
     };
-    xhr.send (); */
+    xhr.send ();
   }
 
-  static load () {
-    return [1,2,3,4];
+  static load (limit) {
+    const query = `select * from surah limit(${limit})`;
+    const results = window.data.db.exec ( query )[ 0 ] || { values: [] };
 
-    //return window.data.db.exec ( "select count(*) from objects" )[ 0 ].values[ 0 ][ 0 ];
+    return results.values.map ( object => this.buildSurah( object ) );
   }
 
   static find ( id ) {
@@ -38,12 +37,19 @@ export default class Surah {
     return new Surah ( obj );
   }
 
-  constructor ( data ) {
-    this.id = id;
-    this.name = name;
-    this.data = null;
-    this.version = version;
-  }
+  constructor ( obj ) {
+    this.surahNumber = String(obj[0]);
+    this.nameEnglish = obj[1];
+    this.nameArabic = obj[2];
+    this.enTranslatedName = obj[3];
+    this.ayahCount = obj[4];
+    this.revelationPlace = obj[5];
+    this.revelationOrder = obj[6];
+    this.bismillahPre = obj[7];
+    this.pages = obj[8];
+
+    window.data1=this;
+ }
 
   baseName () {
     return this.name.split ( ' - ' )[ 0 ];

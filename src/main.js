@@ -21,6 +21,7 @@ import FontAwesome from 'font-awesome/css/font-awesome.css'
 // Import App Custom Styles
 // import AppStyles from './assets/sass/main.scss'
 
+import AppStyles from './assets/sass/main.scss'
 // Import App Component
 import app from './app.vue'
 
