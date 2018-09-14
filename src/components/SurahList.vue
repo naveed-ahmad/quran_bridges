@@ -1,7 +1,7 @@
 <template>
-  <f7-list medial-list>
+  <f7-list medial-list id="surah-list-wrapper">
     <ul>
-      <SurahItem :surah="surah" v-for="surah in surahs"/>
+      <SurahItem :surah="surah" v-for="surah in surahs" key="surah.surahNumber"/>
     </ul>
   </f7-list>
 </template>
@@ -18,4 +18,9 @@
     }
   }
 </script>
+<style class="css">
+  #surah-list-wrapper{
+    margin: 10px 0;
+  }
+</style>
 

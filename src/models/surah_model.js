@@ -1,4 +1,4 @@
-export default class Surah {
+export default class SurahModel {
   static init ( callback ) {
     window.data = {};
     var xhr = new XMLHttpRequest ();
@@ -34,7 +34,7 @@ export default class Surah {
   }
 
   static buildSurah ( obj ) {
-    return new Surah ( obj );
+    return new SurahModel ( obj );
   }
 
   constructor ( obj ) {

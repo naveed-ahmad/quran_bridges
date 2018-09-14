@@ -1,7 +1,5 @@
 <template>
   <f7-page>
-    <f7-navbar title="Videos" back-link="Back" sliding></f7-navbar>
-
     <div v-if="singleVideo">
       <f7-block-title>
         {{title}}
