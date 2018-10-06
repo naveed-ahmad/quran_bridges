@@ -7,7 +7,6 @@
     :ptr-distance="30"
     @infinite="handleScroll"
   >
-    <f7-block inner>
       <div
         id="bismillah"
         className="bismillah text-center word-font"
@@ -15,13 +14,13 @@
       >
         ﷽
       </div>
-    </f7-block>
-    <ul v-if="!this.loading">
-      <li v-for="(ayah, index) in ayahList">
+
+    <div v-if="!this.loading">
+      <div v-for="(ayah, index) in ayahList">
         <Ayah :ayah="ayah"/>
         <Translation :translation="translationList[index]"/>
-      </li>
-    </ul>
+      </div>
+    </div>
   </f7-page>
 </template>
 <script>
@@ -98,5 +97,11 @@
       }
     }
   };
-
 </script>
+
+
+<style lang="scss">
+  .page{
+    padding-bottom: 150px;
+  }
+</style>

@@ -1,6 +1,7 @@
 <template>
   <div class="ayah">
-    {{ayah.text}}
+    <f7-block-title>{{ayah.ayahKey}}</f7-block-title>
+    <p class="content">{{ayah.text}}</p>
   </div>
 </template>
 
@@ -9,13 +10,12 @@
     props: [
       'ayah',
     ],
-    computed: {
-    }
+    computed: {}
   }
 </script>
 
 <style lang="scss">
-  .ayah{
+  .ayah {
     user-select: text;
     direction: ltr;
     float: right;

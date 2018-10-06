@@ -1,7 +1,5 @@
 <template>
-    <div>
-      <span class="translation" v-html="translation.text" />
-    </div>
+  <div class="translation content" v-html="translation.text"/>
 </template>
 
 <script>
@@ -24,6 +22,12 @@
     color: #c0392b;
   }
   .translation{
-    user-select: text;
+    padding-left: 10px;
+  }
+
+  a.f{
+    font-weight: bold;
+    font-size: 20px;
+    padding: 5px;
   }
 </style>

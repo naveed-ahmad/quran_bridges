@@ -38,7 +38,12 @@ input {
   font-family: 'bismillah';
   font-size: 60px;
   color: #000;
-  padding: 25px 0;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.content{
+  user-select: text;
 }
 
 [class^='icon-surah'],

@@ -23,14 +23,10 @@ export default class SurahModel {
 
   static find ( id ) {
     const _id = parseInt ( id )
-    if (! _id || _id <= 0 || _id > 114) return;
-
-    const query = `select id, name, version, badges, properties from  objects_properties where id=${String ( id ).split ( "-" )[ 0 ]}`;
+    const query = `select * from surah where surah_number = ${id}`;
     const result = window.data.db.exec ( query )[ 0 ] || { values: [] };
 
-    if (result.values[ 0 ]) {
-      return this.buildSurah ( result.values[ 0 ] );
-    }
+    return this.buildSurah ( result.values[ 0 ] );
   }
 
   static buildSurah ( obj ) {
