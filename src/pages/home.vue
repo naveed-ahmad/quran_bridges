@@ -35,7 +35,7 @@
 </template>
 
 <script>
-  import SurahModel from '../models/surah_model'
+  import SurahModel from '../models/SurahModel'
 
   import SurahList from '../components/SurahList';
   import SurahItem from '../components/SurahItem';

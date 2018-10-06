@@ -25,8 +25,9 @@
   </f7-page>
 </template>
 <script>
-  import AyahModel from '../models/AyahModel'
-  import TranslationModel from '../models/TranslationModel'
+  import AyahModel from '../models/AyahModel';
+  import FootnoteModel from '../models/FootnoteModel';
+  import TranslationModel from '../models/TranslationModel' ;
 
   import Ayah from '../components/Ayah';
   import Translation from '../components/Translation';
@@ -54,6 +55,12 @@
     mounted () {
       this.loadData ();
     },
+    updated(){
+      this.$$("a.f").on("click", this.showFootnote);
+    },
+    beforeDestroy(){
+      this.$$("a.f").off("click");
+    },
     computed: {
       surahId () {
         return this.$f7route.params.id;
@@ -80,6 +87,14 @@
             this.$f7.preloader.hide ();
           } );
         } );
+      },
+      showFootnote(e){
+        e.preventDefault();
+        e.stopPropagation();
+        let that = this;
+        FootnoteModel.find(e.target.getAttribute("f"), function ( footnote ) {
+          that.$f7.toast.show({text: footnote.text, closeButton: true});
+        });
       }
     }
   };

@@ -9,7 +9,12 @@
     props: [
       'translation',
     ],
+    mounted(){
+    },
     computed: {
+
+    },
+    methods: {
     }
   }
 </script>
