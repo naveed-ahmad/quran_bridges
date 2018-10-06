@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <span class="ayah">{{ayah.text}}</span>
+  <div class="ayah">
+    {{ayah.text}}
   </div>
 </template>
 
@@ -17,5 +17,13 @@
 <style lang="scss">
   .ayah{
     user-select: text;
+    direction: ltr;
+    float: right;
+    margin: 10px;
+    display: block;
+    width: 100%;
+    text-align: right;
+    padding-right: 10px;
+    font-family: me_quran;
   }
 </style>
