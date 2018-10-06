@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span>{{ayah.text}}</span>
+    <span class="ayah">{{ayah.text}}</span>
   </div>
 </template>
 
@@ -15,5 +15,7 @@
 </script>
 
 <style lang="scss">
-
+  .ayah{
+    user-select: text;
+  }
 </style>

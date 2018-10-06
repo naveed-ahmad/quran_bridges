@@ -1,6 +1,6 @@
 <template>
     <div>
-      <span v-html="translation.text" />
+      <span class="translation" v-html="translation.text" />
     </div>
 </template>
 
@@ -22,5 +22,8 @@
 <style lang="scss">
   .h{
     color: #c0392b;
+  }
+  .translation{
+    user-select: text;
   }
 </style>
