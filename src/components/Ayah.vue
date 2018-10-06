@@ -25,5 +25,6 @@
     text-align: right;
     padding-right: 10px;
     font-family: me_quran;
+    font-size: 20px;
   }
 </style>
