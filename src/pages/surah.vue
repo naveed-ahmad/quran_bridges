@@ -137,11 +137,11 @@
     padding-bottom: 40px;
   }
 
-  .md .toast {
+  .toast {
     background: #2196f3 !important;
 
     .toast-button {
-      color: #fff;
+      color: #fff !important;
     }
   }
 </style>

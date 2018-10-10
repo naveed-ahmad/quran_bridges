@@ -1,17 +1,17 @@
 <template>
-  <div class="content">
-    <f7-block-title class="ayah">{{ayahGroupKey}}</f7-block-title>
-    <p class="ayah">
-      <span v-for="(ayah) in ayahGroup">
-         {{ayah.textUthmani}}
-        <b class="ayah-num">{{ayah.ayahNumber}}</b>
-      </span>
-    </p>
+  <div class="content row">
+    <f7-block-title class="ayah col-100">{{ayahGroupKey}}</f7-block-title>
+      <div class="translation col-50">
+        <span v-if="loadingTrans" class="text-align-center">Loading...</span>
+        <span v-html="translation.text" v-for="(translation) in translations"/>
+      </div>
 
-    <div class="translation">
-      <span v-if="loadingTrans" class="text-align-center">Loading...</span>
-      <span v-html="translation.text" v-for="(translation) in translations"/>
-    </div>
+      <div class="ayah col-50">
+        <span v-for="(ayah) in ayahGroup">
+           {{ayah.textUthmani}}
+          <b class="ayah-num">{{ayah.ayahNumber}}</b>
+        </span>
+      </div>
   </div>
 </template>
 
@@ -55,7 +55,6 @@
   .ayah {
     user-select: text;
     direction: ltr;
-    margin: 10px;
     display: block;
     text-align: right;
     padding-right: 10px;
