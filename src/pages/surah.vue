@@ -15,7 +15,7 @@
       ﷽
     </div>
 
-    <div v-if="!this.loading">
+    <div class="surah" v-if="!this.loading">
       <div class="block block-strong" v-for="(ayats) in ayahList">
         <AyahGroup :ayahGroup="ayats"/>
       </div>
@@ -133,8 +133,8 @@
 
 
 <style lang="scss">
-  .page {
-    position: fixed;
+  .surah {
+    padding-bottom: 40px;
   }
 
   .md .toast {
