@@ -7,18 +7,17 @@
     :ptr-distance="30"
     @infinite="handleScroll"
   >
-      <div
-        id="bismillah"
-        className="bismillah text-center word-font"
-        title="بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ"
-      >
-        ﷽
-      </div>
+    <div
+      id="bismillah"
+      className="bismillah text-center word-font"
+      title="بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ"
+    >
+      ﷽
+    </div>
 
     <div v-if="!this.loading">
-      <div v-for="(ayah, index) in ayahList">
-        <Ayah :ayah="ayah"/>
-        <Translation :translation="translationList[index]"/>
+      <div class="block block-strong" v-for="(ayats) in ayahList">
+        <AyahGroup :ayahGroup="ayats"/>
       </div>
     </div>
   </f7-page>
@@ -28,14 +27,14 @@
   import FootnoteModel from '../models/FootnoteModel';
   import TranslationModel from '../models/TranslationModel' ;
 
-  import Ayah from '../components/Ayah';
-  import Translation from '../components/Translation';
+  import AyahGroup from '../components/AyahGroup';
+  //import Translation from '../components/Translation';
 
   export default {
     name: 'surahPage',
     components: {
-      Ayah,
-      Translation,
+      AyahGroup,
+      //  Translation,
     },
     beforeMount () {
       this.$f7ready ( ( f7 ) => {
@@ -46,19 +45,23 @@
       return {
         loading: true,
         loadingMore: true,
-        showAmount: 20,
-        ayahList: [],
-        translationList: []
+        groupStart: 1, //TODO: think about better names
+        groupEnd: 10,
+        ayahList: {},
+        translationList: {}
       }
     },
     mounted () {
       this.loadData ();
     },
-    updated(){
-      this.$$("a.f").on("click", this.showFootnote);
+    updated () {
+      this.$$ ( "a.f" ).on ( "click", this.showFootnote );
+      this.$$ ( "a.sup" ).on ( "click", this.showSuperscript );
     },
-    beforeDestroy(){
-      this.$$("a.f").off("click");
+    beforeDestroy () {
+      this.$$ ( "a.f" ).off ( "click" );
+      this.$$ ( "a.sup" ).off ( "click" );
+
     },
     computed: {
       surahId () {
@@ -68,32 +71,61 @@
     methods: {
       handleScroll () {
         if (this.loadingMore) {
-          this.showAmount += 24;
-          this.loadData();
+          this.groupStart = this.groupEnd;
+          this.groupEnd += 10;
+
+          this.loadData ();
         }
       },
       loadData () {
-        AyahModel.load ( this.surahId, this.showAmount, ( list ) => {
-          if(list.length < this.showAmount)
+        let that = this;
+        AyahModel.load ( this.surahId, this.groupStart, this.groupEnd, ( list ) => {
+          if (list.length == 0) {
+            //No more data to load
             this.loadingMore = false;
-          
-          this.ayahList = list;
-          const ayahIds = this.ayahList.map ( ( ayah ) => ayah.ayahId );
-
-          TranslationModel.load ( ayahIds, ( transList ) => {
-            this.translationList = transList;
-            this.loading = false;
-            this.$f7.preloader.hide ();
+          } else {
+            list.forEach ( ( ayah ) => {
+              if (that.ayahList[ ayah.ayahGroup ] == undefined) {
+                that.ayahList[ ayah.ayahGroup ] = []
+              }
+              that.ayahList[ ayah.ayahGroup ].push ( ayah );
+              this.loading = false;
+              this.$f7.preloader.hide ();
+            } );
+          }
+        } );
+      },
+      showFootnote ( e ) {
+        e.preventDefault ();
+        e.stopPropagation ();
+        let that = this;
+        FootnoteModel.find ( e.target.getAttribute ( "f" ), function ( footnote ) {
+          that.$f7.toast.show ( {
+            closeButtonText: '<b>Close</b>',
+            text: footnote.text,
+            closeButton: true,
+            closeTimeout: 10000
           } );
         } );
       },
-      showFootnote(e){
-        e.preventDefault();
-        e.stopPropagation();
-        let that = this;
-        FootnoteModel.find(e.target.getAttribute("f"), function ( footnote ) {
-          that.$f7.toast.show({text: footnote.text, closeButton: true});
-        });
+      showSuperscript ( e ) {
+        e.preventDefault ();
+        e.stopPropagation ();
+        let that = this, supText;
+        let text = e.target.textContent;
+
+        if (text == 'pl')
+          supText = 'Plural';
+        else if (text == 'sg')
+          supText = 'Singular';
+
+        if (supText)
+          that.$f7.toast.show ( {
+            closeButtonText: '<b>Close</b>',
+            text: supText,
+            closeButton: true,
+            closeTimeout: 2000
+          } );
       }
     }
   };
@@ -101,7 +133,15 @@
 
 
 <style lang="scss">
-  .page{
-    padding-bottom: 150px;
+  .page {
+    position: fixed;
+  }
+
+  .md .toast {
+    background: #2196f3 !important;
+
+    .toast-button {
+      color: #fff;
+    }
   }
 </style>

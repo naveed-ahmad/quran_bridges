@@ -1,6 +1,6 @@
 export default class AyahModel {
-  static load (surahId, limit, callback) {
-    const query = `SELECT * FROM ayah WHERE surah_id=${surahId} ORDER BY id ASC limit(${limit})`;
+  static load (surahId, grpStart, grpEnd, callback) {
+    const query = `SELECT * FROM ayah WHERE surah_id=${surahId} AND ayah_group BETWEEN ${grpStart} AND ${grpEnd} ORDER BY id ASC`;
 
     const results = window.data.db.exec ( query )[ 0 ] || { values: [] };
     callback(results.values.map ( object => this.buildAyah( object ) ));
@@ -11,11 +11,14 @@ export default class AyahModel {
   }
 
   constructor ( obj ) {
-    this.ayahNumber = obj[0];
+    window.obj=obj;
+    this.ayahNumber = String(obj[0]).padStart(3,'0');
     this.surahId = obj[1];
     this.pageNumber = obj[2];
-    this.text = obj[3];
-    this.ayahKey = obj[4];
-    this.ayahId = obj[5];
+    this.textUthmani = obj[3];
+    this.textIndopak = obj[4];
+    this.ayahKey = obj[5];
+    this.ayahId = obj[6];
+    this.ayahGroup = obj[7];
   }
 }

@@ -33,6 +33,12 @@ input {
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'quran_common';
+  src: url(../fonts/quran_common.ttf);
+  font-weight: normal;
+  font-style: normal;
+}
 
 #bismillah {
   font-family: 'bismillah';
@@ -41,9 +47,24 @@ input {
   padding-top: 20px;
   text-align: center;
 }
-
-.content{
+.ayah-num{
+  font-family: 'quran_common';
+}
+.content *{
   user-select: text;
+}
+
+.h{
+  color: #c0392b;
+}
+.translation{
+  padding-left: 10px;
+}
+
+a.f{
+  font-weight: bold;
+  font-size: 20px;
+  padding: 5px;
 }
 
 [class^='icon-surah'],
