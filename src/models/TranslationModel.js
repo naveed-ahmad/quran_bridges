@@ -13,6 +13,7 @@ export default class TranslationModel {
   constructor ( obj ) {
     this.id = obj[0];
     this.ayahKey = obj[1];
+    this.ayahNumber = obj[1].split(':')[1];
     this.text = obj[2];
     this.surahId = obj[3];
   }
